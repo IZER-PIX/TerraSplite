@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6011076950958099420}
   - component: {fileID: 6011076950958099423}
-  - component: {fileID: 6011076950958099422}
   - component: {fileID: 6011076950958099409}
   - component: {fileID: 6011076950958099408}
   - component: {fileID: 6011076950958099411}
@@ -48,24 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1303a9ccd15e244abb6628ea6518ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attack: {fileID: 6011076950958099422}
   _movement: {fileID: 6011076950958099409}
-  Health: 25
-  Damage: 3
-  Level: 1
-  LevelPoints: 0
---- !u!114 &6011076950958099422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6011076950958099410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c3a4cc330ed76a4f8d9be7fc0d4b67f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _health: 0
+  _level: 0
+  _levelPoints: 0
 --- !u!114 &6011076950958099409
 MonoBehaviour:
   m_ObjectHideFlags: 0

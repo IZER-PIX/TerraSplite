@@ -3,13 +3,30 @@ using UnityEngine;
 
 public  class Entity : MonoBehaviour
 {
-    [SerializeField] protected Attack _attack;
     [SerializeField] protected Movement _movement;
 
-    public int Health;
-    public int Damage;
-    public int Level;
-    public int LevelPoints;
+    [SerializeField] protected int _health;
+    [SerializeField] protected int _level;
+    [SerializeField] protected int _levelPoints;
 
-    private Vector3 Track(GameObject gObject) => gObject.transform.position;
+    private EntityDamageble _entityDamageble;
+
+    public int Health {
+        get => _health;
+        set {
+            if(value > 0) _health = value;
+        }
+    }
+    public int Level {
+        get => _level;
+        set { if(value > 0) _level = value;}
+    }
+    public int LevelPoints {
+        get => _levelPoints;
+        set { if(value > 0) _levelPoints = value;}
+    }
+    public EntityDamageble @EntityDamageble{
+        get => @EntityDamageble;
+        set{}
+    }
 }

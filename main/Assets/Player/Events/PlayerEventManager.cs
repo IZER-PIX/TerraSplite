@@ -8,5 +8,4 @@ public static class PlayerEventManager{
     
     public static void OnHealing(int healBoost) => OnHeal.Invoke(healBoost);
     public static void OnLevelIncerasing(int XP) => OnLevelIncerase.Invoke(XP);
-    public static void OnTakingDamge(int damge) => OnTakeDamage.Invoke(damge);
 }
