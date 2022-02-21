@@ -202,6 +202,34 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Camera"",
+            ""id"": ""7153cc55-e380-40a1-97ba-4f20c2a3845d"",
+            ""actions"": [
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""5309421c-35a8-452e-a9a7-09d338dd40d3"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5d49932c-cdf3-440e-900d-8472ece01f2d"",
+                    ""path"": ""<VirtualMouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -216,6 +244,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Actions_Throw = m_Actions.FindAction("Throw", throwIfNotFound: true);
         m_Actions_Attack = m_Actions.FindAction("Attack", throwIfNotFound: true);
         m_Actions_Action = m_Actions.FindAction("Action", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_MousePosition = m_Camera.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -369,6 +400,39 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         }
     }
     public ActionsActions @Actions => new ActionsActions(this);
+
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private ICameraActions m_CameraActionsCallbackInterface;
+    private readonly InputAction m_Camera_MousePosition;
+    public struct CameraActions
+    {
+        private @PlayerActions m_Wrapper;
+        public CameraActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MousePosition => m_Wrapper.m_Camera_MousePosition;
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        public void SetCallbacks(ICameraActions instance)
+        {
+            if (m_Wrapper.m_CameraActionsCallbackInterface != null)
+            {
+                @MousePosition.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMousePosition;
+            }
+            m_Wrapper.m_CameraActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
+            }
+        }
+    }
+    public CameraActions @Camera => new CameraActions(this);
     public interface IMoveActions
     {
         void OnWASD(InputAction.CallbackContext context);
@@ -380,5 +444,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnThrow(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
+    }
+    public interface ICameraActions
+    {
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }

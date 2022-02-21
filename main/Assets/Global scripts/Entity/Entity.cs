@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public  class Entity : MonoBehaviour
-{
+{   
     [SerializeField] protected Movement _movement;
 
     [SerializeField] protected int _health;

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public interface IWeaponVisitor
 {
-    public void Visitor(Sword weapon);
-    public void Visitor(Gun weapon, RaycastHit hit);
-    public void Visitor(MagicBall weapon, RaycastHit hit);
+    public void Visit(Sword weapon);
+    public void Visit(Gun weapon, RaycastHit hit);
 }

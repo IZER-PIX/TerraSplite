@@ -2,22 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityHitBox : Entity, IWeaponVisitor
+public class EntityHitBox : MonoBehaviour, IWeaponVisitor
 {
     [SerializeField] protected Entity _entity;
     [SerializeField] protected Collider2D _hitBox;
 
-
     private void DisableHitBox() => _hitBox.enabled = false;
     private void EnableHitBox() => _hitBox.enabled = true;
 
-    public void Visitor(Sword weapon){
+    public void Visit(Sword weapon){
         OverlapVisit(weapon);
     }
-    public void Visitor(Gun weapon, RaycastHit hit){
-        RaycastVisit(weapon, hit);
-    }
-    public void Visitor(MagicBall weapon, RaycastHit hit){
+    public void Visit(Gun weapon, RaycastHit hit){
         RaycastVisit(weapon, hit);
     }
 
