@@ -344,6 +344,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a523f8336b160f4ca38473e8da65be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponOwner: {fileID: 1945133345}
+  _damage: 0
+  _ammunition: 20
 --- !u!1 &609371686
 GameObject:
   m_ObjectHideFlags: 0

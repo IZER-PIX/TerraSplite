@@ -7,10 +7,23 @@ public abstract class WeaponRaycast : Weapon
     private event Action<RaycastHit> HitIsNotDesiredTarget;
     private event Action<RaycastHit> HitIsDesiredTarget;
 
+    private PlayerActions _input;
+
+    private void OnEnable()  => _input.Enable();
+    private void OnDisable() => _input.Disable();
+    private void OnDestroy() => _input.Disable();
+
+    private void Awake() {
+        _input = new PlayerActions();
+
+        _input.Actions.Attack.performed += ctx => Attack();
+    }
 
     protected virtual void Attack(){
         Vector2 direction = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         RaycastHit hit;
+
+        Debug.Log("Shoot");
 
         if(Physics.Raycast(
             WeaponOwner.transform.position, direction, out hit)){
@@ -23,6 +36,8 @@ public abstract class WeaponRaycast : Weapon
         if(collider.TryGetComponent(out IWeaponVisitor visitor)){
             Accept(visitor, hit);
             HitIsDesiredTarget.Invoke(hit);
+        }else{
+            HitIsNotDesiredTarget?.Invoke(hit);
         }
     }
 

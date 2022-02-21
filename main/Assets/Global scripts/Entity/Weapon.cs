@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
-    private Entity _weaponOwner;
-    private int _damage;
-    private int _ammunition;
+    [SerializeField]private Entity _weaponOwner;
+    [SerializeField]private int _damage;
+    [SerializeField]private int _ammunition;
 
     protected bool allowShooting = true;
 
