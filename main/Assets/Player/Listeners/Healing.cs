@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Healing : MonoBehaviour
 {
-    [SerializeField] private Player @Player;
+    private Player @Player;
 
     private void Awake() {
+        @Player = GetComponent<Player>();
         PlayerEventManager.OnHeal.AddListener(Heal); 
     }
     private void Heal(int healBoost) => @Player.Health += healBoost;

@@ -3,18 +3,18 @@ using System;
 
 public class EntityDamageble : MonoBehaviour
 {
-    public Entity @Entity;
-
-    public void Setup(Entity entity) => @Entity = entity;
-
     public event Action<int> DamageAplaied;
+
+    private Entity _entity;
+
+    private void Awake(){
+        _entity = GetComponent<Entity>();
+    }
 
     public void AplayDamage(int damage){
         if(damage < 0) return;
 
-        @Entity.Health -= ProcessingDamage(damage);
+        _entity.Health = Mathf.Clamp(_entity.Health - damage, 0, _entity.MaxHealth);
         DamageAplaied?.Invoke(damage);
     }
-
-    protected virtual int ProcessingDamage(int damage) => damage; // В будущем можно перезаписать в другом классе и чё-то делать с показателем damage
 }

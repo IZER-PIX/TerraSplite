@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class EntityHitBox : MonoBehaviour, IWeaponVisitor
 {
-    [SerializeField] protected Entity _entity;
-    [SerializeField] protected Collider2D _hitBox;
+    protected Entity _entity;
+    protected Collider2D _hitBox;
+
+    private void Awake(){
+        _entity = GetComponent<Entity>();
+        _hitBox = GetComponent<Collider2D>();
+    }
 
     private void DisableHitBox() => _hitBox.enabled = false;
     private void EnableHitBox() => _hitBox.enabled = true;
 
-    public void Visit(Sword weapon){
+    public virtual void Visit(Sword weapon){
         OverlapVisit(weapon);
     }
-    public void Visit(Gun weapon, RaycastHit hit){
+    public virtual void Visit(Gun weapon, RaycastHit2D hit){
         RaycastVisit(weapon, hit);
     }
 
-    protected void OverlapVisit(Weapon weapon, int damageMultiplier = 1){
+    protected void OverlapVisit(WeaponOverlap weapon, int damageMultiplier = 1){
         int damage = weapon.Damage * damageMultiplier;
         _entity.@EntityDamageble.AplayDamage(damage);
     }
-    protected void RaycastVisit(Weapon weapon, RaycastHit hit, int damageMultiplier = 1){
+    protected void RaycastVisit(WeaponRaycast weapon, RaycastHit2D hit, int damageMultiplier = 1){
         int damage = weapon.Damage * damageMultiplier;
         _entity.@EntityDamageble.AplayDamage(damage);
     }

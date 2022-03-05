@@ -127,7 +127,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Attack"",
+                    ""name"": ""RaycastAttack"",
                     ""type"": ""Button"",
                     ""id"": ""127237d8-43d2-4b91-b5c5-44e4fddebb65"",
                     ""expectedControlType"": ""Button"",
@@ -139,6 +139,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""name"": ""Action"",
                     ""type"": ""Button"",
                     ""id"": ""3c09e390-06fd-48bc-acc1-06193faae8a3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OverlapAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""3254018a-72bd-4537-91cf-462a83ee3858"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -182,11 +191,11 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""acae7461-cc5b-482f-aca3-09312c435f4e"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Attack"",
+                    ""action"": ""RaycastAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -200,32 +209,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""Action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Camera"",
-            ""id"": ""7153cc55-e380-40a1-97ba-4f20c2a3845d"",
-            ""actions"": [
-                {
-                    ""name"": ""MousePosition"",
-                    ""type"": ""Value"",
-                    ""id"": ""5309421c-35a8-452e-a9a7-09d338dd40d3"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
+                },
                 {
                     ""name"": """",
-                    ""id"": ""5d49932c-cdf3-440e-900d-8472ece01f2d"",
-                    ""path"": ""<VirtualMouse>/position"",
+                    ""id"": ""05f6b3c5-b27f-438f-8983-6500d830d805"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MousePosition"",
+                    ""action"": ""OverlapAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -242,11 +234,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Actions_Shift = m_Actions.FindAction("Shift", throwIfNotFound: true);
         m_Actions_PickUp = m_Actions.FindAction("PickUp", throwIfNotFound: true);
         m_Actions_Throw = m_Actions.FindAction("Throw", throwIfNotFound: true);
-        m_Actions_Attack = m_Actions.FindAction("Attack", throwIfNotFound: true);
+        m_Actions_RaycastAttack = m_Actions.FindAction("RaycastAttack", throwIfNotFound: true);
         m_Actions_Action = m_Actions.FindAction("Action", throwIfNotFound: true);
-        // Camera
-        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
-        m_Camera_MousePosition = m_Camera.FindAction("MousePosition", throwIfNotFound: true);
+        m_Actions_OverlapAttack = m_Actions.FindAction("OverlapAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -342,8 +332,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_Shift;
     private readonly InputAction m_Actions_PickUp;
     private readonly InputAction m_Actions_Throw;
-    private readonly InputAction m_Actions_Attack;
+    private readonly InputAction m_Actions_RaycastAttack;
     private readonly InputAction m_Actions_Action;
+    private readonly InputAction m_Actions_OverlapAttack;
     public struct ActionsActions
     {
         private @PlayerActions m_Wrapper;
@@ -351,8 +342,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @Shift => m_Wrapper.m_Actions_Shift;
         public InputAction @PickUp => m_Wrapper.m_Actions_PickUp;
         public InputAction @Throw => m_Wrapper.m_Actions_Throw;
-        public InputAction @Attack => m_Wrapper.m_Actions_Attack;
+        public InputAction @RaycastAttack => m_Wrapper.m_Actions_RaycastAttack;
         public InputAction @Action => m_Wrapper.m_Actions_Action;
+        public InputAction @OverlapAttack => m_Wrapper.m_Actions_OverlapAttack;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -371,12 +363,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Throw.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnThrow;
                 @Throw.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnThrow;
                 @Throw.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnThrow;
-                @Attack.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnAttack;
-                @Attack.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnAttack;
-                @Attack.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnAttack;
+                @RaycastAttack.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRaycastAttack;
+                @RaycastAttack.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRaycastAttack;
+                @RaycastAttack.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRaycastAttack;
                 @Action.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnAction;
                 @Action.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnAction;
                 @Action.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnAction;
+                @OverlapAttack.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnOverlapAttack;
+                @OverlapAttack.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnOverlapAttack;
+                @OverlapAttack.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnOverlapAttack;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -390,49 +385,19 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Throw.started += instance.OnThrow;
                 @Throw.performed += instance.OnThrow;
                 @Throw.canceled += instance.OnThrow;
-                @Attack.started += instance.OnAttack;
-                @Attack.performed += instance.OnAttack;
-                @Attack.canceled += instance.OnAttack;
+                @RaycastAttack.started += instance.OnRaycastAttack;
+                @RaycastAttack.performed += instance.OnRaycastAttack;
+                @RaycastAttack.canceled += instance.OnRaycastAttack;
                 @Action.started += instance.OnAction;
                 @Action.performed += instance.OnAction;
                 @Action.canceled += instance.OnAction;
+                @OverlapAttack.started += instance.OnOverlapAttack;
+                @OverlapAttack.performed += instance.OnOverlapAttack;
+                @OverlapAttack.canceled += instance.OnOverlapAttack;
             }
         }
     }
     public ActionsActions @Actions => new ActionsActions(this);
-
-    // Camera
-    private readonly InputActionMap m_Camera;
-    private ICameraActions m_CameraActionsCallbackInterface;
-    private readonly InputAction m_Camera_MousePosition;
-    public struct CameraActions
-    {
-        private @PlayerActions m_Wrapper;
-        public CameraActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MousePosition => m_Wrapper.m_Camera_MousePosition;
-        public InputActionMap Get() { return m_Wrapper.m_Camera; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
-        public void SetCallbacks(ICameraActions instance)
-        {
-            if (m_Wrapper.m_CameraActionsCallbackInterface != null)
-            {
-                @MousePosition.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMousePosition;
-                @MousePosition.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMousePosition;
-                @MousePosition.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMousePosition;
-            }
-            m_Wrapper.m_CameraActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @MousePosition.started += instance.OnMousePosition;
-                @MousePosition.performed += instance.OnMousePosition;
-                @MousePosition.canceled += instance.OnMousePosition;
-            }
-        }
-    }
-    public CameraActions @Camera => new CameraActions(this);
     public interface IMoveActions
     {
         void OnWASD(InputAction.CallbackContext context);
@@ -442,11 +407,8 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnShift(InputAction.CallbackContext context);
         void OnPickUp(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
+        void OnRaycastAttack(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
-    }
-    public interface ICameraActions
-    {
-        void OnMousePosition(InputAction.CallbackContext context);
+        void OnOverlapAttack(InputAction.CallbackContext context);
     }
 }

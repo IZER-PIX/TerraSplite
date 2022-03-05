@@ -105,7 +105,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
+                    "name": "RaycastAttack",
                     "type": "Button",
                     "id": "127237d8-43d2-4b91-b5c5-44e4fddebb65",
                     "expectedControlType": "Button",
@@ -117,6 +117,15 @@
                     "name": "Action",
                     "type": "Button",
                     "id": "3c09e390-06fd-48bc-acc1-06193faae8a3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OverlapAttack",
+                    "type": "Button",
+                    "id": "3254018a-72bd-4537-91cf-462a83ee3858",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -160,11 +169,11 @@
                 {
                     "name": "",
                     "id": "acae7461-cc5b-482f-aca3-09312c435f4e",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "RaycastAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -178,32 +187,15 @@
                     "action": "Action",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Camera",
-            "id": "7153cc55-e380-40a1-97ba-4f20c2a3845d",
-            "actions": [
-                {
-                    "name": "MousePosition",
-                    "type": "Value",
-                    "id": "5309421c-35a8-452e-a9a7-09d338dd40d3",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "5d49932c-cdf3-440e-900d-8472ece01f2d",
-                    "path": "<VirtualMouse>/position",
+                    "id": "05f6b3c5-b27f-438f-8983-6500d830d805",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MousePosition",
+                    "action": "OverlapAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

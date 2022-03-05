@@ -1,9 +1,10 @@
 using UnityEngine;
 
 public class LevelIncrese : MonoBehaviour {
-    [SerializeField] private Player @Player;
+    private Player @Player;
 
     private void Awake() {
+        @Player = GetComponent<Player>();
         PlayerEventManager.OnLevelIncerase.AddListener(IncreseLevel);
     }
 
@@ -12,6 +13,7 @@ public class LevelIncrese : MonoBehaviour {
         @Player.LevelPoints += xpBoost;
 
         if (@Player.LevelPoints >= _levelIncreseOffset){
+            @Player.MaxHealth += (int)Mathf.Round(_levelIncreseOffset/2);
             @Player.Level += 1;
             @Player.Health += 10;
         }
