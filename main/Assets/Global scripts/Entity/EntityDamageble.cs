@@ -5,10 +5,10 @@ public class EntityDamageble : MonoBehaviour
 {
     public event Action<int> DamageAplaied;
 
-    private Entity _entity;
+    [SerializeField] private Entity _entity;
 
     private void Awake(){
-        _entity = GetComponent<Entity>();
+        _entity = GetComponentInParent<Entity>();
     }
 
     public void AplayDamage(int damage){

@@ -11,6 +11,6 @@ public class LevelUIChange : MonoBehaviour
     }
 
     private void DisplayLevel(int x){
-        GetComponent<Text>().text = "Level " + @Player.Level;
+        GetComponent<Text>().text = ""+@Player.Level;
     }
 }

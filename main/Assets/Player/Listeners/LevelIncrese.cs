@@ -12,11 +12,8 @@ public class LevelIncrese : MonoBehaviour {
         int _levelIncreseOffset = 6 * @Player.Level;
         @Player.LevelPoints += xpBoost;
 
-        if (@Player.LevelPoints >= _levelIncreseOffset){
-            @Player.MaxHealth += (int)Mathf.Round(_levelIncreseOffset/2);
+        if (@Player.LevelPoints >= _levelIncreseOffset)
             @Player.Level += 1;
-            @Player.Health += 10;
-        }
-        Debug.Log(_levelIncreseOffset);
+
     }
 }

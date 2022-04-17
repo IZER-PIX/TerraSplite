@@ -8,7 +8,8 @@ public class CameraTracking : MonoBehaviour
     [SerializeField] private float SmoothSpeed;
     [SerializeField] private Vector3 Offset;
 
-    private void LateUpdate() {
+    private void LateUpdate()
+    {
         Vector3 smoothPosition = Target.position + Offset;
         transform.position = Vector3.Lerp(transform.position, smoothPosition, SmoothSpeed);
     }

@@ -13,6 +13,6 @@ public class HealthUIChange : MonoBehaviour
     }
 
     private void DisplayHealth(int health){
-        GetComponent<Text>().text = "Health " + @Player.Health;
+        GetComponent<Slider>().value = @Player.Health * 0.01f;
     }
 }
