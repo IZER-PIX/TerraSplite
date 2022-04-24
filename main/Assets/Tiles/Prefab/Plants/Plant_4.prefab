@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3464899970576579738}
   - component: {fileID: 1519176149155523595}
   - component: {fileID: 4594745328268670278}
+  - component: {fileID: 3102616107449152874}
   m_Layer: 0
   m_Name: Plant_4
   m_TagString: Untagged
@@ -132,3 +133,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShadowGroup: 0
+--- !u!70 &3102616107449152874
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913874676095629715}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.06, y: -1.22}
+  m_Size: {x: 0.29, y: 1.46}
+  m_Direction: 0

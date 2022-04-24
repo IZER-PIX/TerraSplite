@@ -100,33 +100,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
             ""id"": ""70262e3f-5f3b-45d9-aecc-930f99f9f723"",
             ""actions"": [
                 {
-                    ""name"": ""Shift"",
-                    ""type"": ""Button"",
-                    ""id"": ""847f1bd1-85eb-4d26-aa06-f848592f4f65"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""PickUp"",
-                    ""type"": ""Button"",
-                    ""id"": ""3bcc3501-65a4-4da7-b94d-9125d4635736"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Throw"",
-                    ""type"": ""Button"",
-                    ""id"": ""c5cd3e04-670a-440d-bdb9-8a5a981ad946"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""RaycastAttack"",
                     ""type"": ""Button"",
                     ""id"": ""127237d8-43d2-4b91-b5c5-44e4fddebb65"",
@@ -161,42 +134,18 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShowPlayerStats"",
+                    ""type"": ""Button"",
+                    ""id"": ""5304a957-3010-4291-b4bb-175a953e102a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""48fdb103-de2c-4201-93c4-ec6b2b092fbb"",
-                    ""path"": ""<Keyboard>/shift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Shift"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""56965e56-6ff7-4efe-9d62-2cd79feeb2b3"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PickUp"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3258357c-6e09-4d32-9f0e-38d188478aea"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Throw"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""acae7461-cc5b-482f-aca3-09312c435f4e"",
@@ -240,6 +189,17 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""OverlapAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cee6099b-59e4-4486-a397-8bc49c5eff0c"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowPlayerStats"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -251,13 +211,11 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Move_WASD = m_Move.FindAction("WASD", throwIfNotFound: true);
         // Actions
         m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
-        m_Actions_Shift = m_Actions.FindAction("Shift", throwIfNotFound: true);
-        m_Actions_PickUp = m_Actions.FindAction("PickUp", throwIfNotFound: true);
-        m_Actions_Throw = m_Actions.FindAction("Throw", throwIfNotFound: true);
         m_Actions_RaycastAttack = m_Actions.FindAction("RaycastAttack", throwIfNotFound: true);
         m_Actions_Action = m_Actions.FindAction("Action", throwIfNotFound: true);
         m_Actions_Reload = m_Actions.FindAction("Reload", throwIfNotFound: true);
         m_Actions_OverlapAttack = m_Actions.FindAction("OverlapAttack", throwIfNotFound: true);
+        m_Actions_ShowPlayerStats = m_Actions.FindAction("ShowPlayerStats", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -350,24 +308,20 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     // Actions
     private readonly InputActionMap m_Actions;
     private IActionsActions m_ActionsActionsCallbackInterface;
-    private readonly InputAction m_Actions_Shift;
-    private readonly InputAction m_Actions_PickUp;
-    private readonly InputAction m_Actions_Throw;
     private readonly InputAction m_Actions_RaycastAttack;
     private readonly InputAction m_Actions_Action;
     private readonly InputAction m_Actions_Reload;
     private readonly InputAction m_Actions_OverlapAttack;
+    private readonly InputAction m_Actions_ShowPlayerStats;
     public struct ActionsActions
     {
         private @PlayerActions m_Wrapper;
         public ActionsActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Shift => m_Wrapper.m_Actions_Shift;
-        public InputAction @PickUp => m_Wrapper.m_Actions_PickUp;
-        public InputAction @Throw => m_Wrapper.m_Actions_Throw;
         public InputAction @RaycastAttack => m_Wrapper.m_Actions_RaycastAttack;
         public InputAction @Action => m_Wrapper.m_Actions_Action;
         public InputAction @Reload => m_Wrapper.m_Actions_Reload;
         public InputAction @OverlapAttack => m_Wrapper.m_Actions_OverlapAttack;
+        public InputAction @ShowPlayerStats => m_Wrapper.m_Actions_ShowPlayerStats;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -377,15 +331,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_ActionsActionsCallbackInterface != null)
             {
-                @Shift.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShift;
-                @Shift.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShift;
-                @Shift.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShift;
-                @PickUp.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPickUp;
-                @PickUp.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPickUp;
-                @PickUp.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPickUp;
-                @Throw.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnThrow;
-                @Throw.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnThrow;
-                @Throw.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnThrow;
                 @RaycastAttack.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRaycastAttack;
                 @RaycastAttack.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRaycastAttack;
                 @RaycastAttack.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRaycastAttack;
@@ -398,19 +343,13 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @OverlapAttack.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnOverlapAttack;
                 @OverlapAttack.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnOverlapAttack;
                 @OverlapAttack.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnOverlapAttack;
+                @ShowPlayerStats.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShowPlayerStats;
+                @ShowPlayerStats.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShowPlayerStats;
+                @ShowPlayerStats.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShowPlayerStats;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Shift.started += instance.OnShift;
-                @Shift.performed += instance.OnShift;
-                @Shift.canceled += instance.OnShift;
-                @PickUp.started += instance.OnPickUp;
-                @PickUp.performed += instance.OnPickUp;
-                @PickUp.canceled += instance.OnPickUp;
-                @Throw.started += instance.OnThrow;
-                @Throw.performed += instance.OnThrow;
-                @Throw.canceled += instance.OnThrow;
                 @RaycastAttack.started += instance.OnRaycastAttack;
                 @RaycastAttack.performed += instance.OnRaycastAttack;
                 @RaycastAttack.canceled += instance.OnRaycastAttack;
@@ -423,6 +362,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @OverlapAttack.started += instance.OnOverlapAttack;
                 @OverlapAttack.performed += instance.OnOverlapAttack;
                 @OverlapAttack.canceled += instance.OnOverlapAttack;
+                @ShowPlayerStats.started += instance.OnShowPlayerStats;
+                @ShowPlayerStats.performed += instance.OnShowPlayerStats;
+                @ShowPlayerStats.canceled += instance.OnShowPlayerStats;
             }
         }
     }
@@ -433,12 +375,10 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     }
     public interface IActionsActions
     {
-        void OnShift(InputAction.CallbackContext context);
-        void OnPickUp(InputAction.CallbackContext context);
-        void OnThrow(InputAction.CallbackContext context);
         void OnRaycastAttack(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnOverlapAttack(InputAction.CallbackContext context);
+        void OnShowPlayerStats(InputAction.CallbackContext context);
     }
 }

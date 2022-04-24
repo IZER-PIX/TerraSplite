@@ -9,10 +9,15 @@ public class HealthUIChange : MonoBehaviour
         DisplayHealth(0);
         PlayerEventManager.OnTakeDamage.AddListener(DisplayHealth);
         PlayerEventManager.OnHeal.AddListener(DisplayHealth);
-        PlayerEventManager.OnLevelIncerase.AddListener(DisplayHealth);
+    }
+
+    private void Update()
+    {
+        DisplayHealth(0);
     }
 
     private void DisplayHealth(int health){
         GetComponent<Slider>().value = @Player.Health * 0.01f;
+        // GetComponent<TextMeshProUGUI>().Text = @Player.Health;
     }
 }
